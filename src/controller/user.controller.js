@@ -51,7 +51,6 @@ class UserController {
   async changePassword(ctx, next) {
     const { id } = ctx.state.user
     const { password } = ctx.request.body
-    console.log(id, password)
 
     try {
       const res = await updateUserById({ id, password })
