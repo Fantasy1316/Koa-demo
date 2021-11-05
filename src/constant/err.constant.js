@@ -85,5 +85,10 @@ module.exports = {
     code: '10208',
     message: '上架商品失败',
     data: null
+  },
+  findGoodsError: {
+    code: '10209',
+    message: '获取商品失败',
+    data: null
   }
 }

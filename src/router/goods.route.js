@@ -10,7 +10,8 @@ const {
   upload,
   update,
   remove,
-  restore
+  restore,
+  findAll
 } = require('../controller/goods.controller')
 const { auth, hasAdminPermission } = require('../middleware/auth.middleware')
 const { validator } = require('../middleware/goods.middleware')
@@ -42,7 +43,10 @@ router.put('/:id', auth, hasAdminPermission, validator, update)
 /** 下架商品 */
 router.post('/:id/off', auth, hasAdminPermission, remove)
 
-/** 商家商品 */
+/** 上架商品 */
 router.post('/:id/on', auth, hasAdminPermission, restore)
+
+/** 查询商品列表 */
+router.get('/', findAll)
 
 module.exports = router

@@ -20,6 +20,20 @@ class GoodsServer {
     const res = await Goods.restore({ where: { id } })
     return res
   }
+
+  async findGoods(page, pageSize) {
+    const offset = (page - 1) * pageSize
+    const limit = parseInt(pageSize)
+
+    const { count, rows } = await Goods.findAndCountAll({ offset, limit })
+
+    return {
+      page,
+      pageSize,
+      total: count,
+      list: rows
+    }
+  }
 }
 
 module.exports = new GoodsServer()

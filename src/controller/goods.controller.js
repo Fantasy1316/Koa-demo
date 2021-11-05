@@ -5,14 +5,15 @@ const {
   invalidGoodsId,
   updateGoodsError,
   removeGoodsError,
-  restoreGoodsError
+  restoreGoodsError,
+  findGoodsError
 } = require('../constant/err.constant')
-const Goods = require('../model/goods.model')
 const {
   createGoods,
   updateGoods,
   removeGoods,
-  restoreGoods
+  restoreGoods,
+  findGoods
 } = require('../service/goods.server.js')
 
 class GoodsController {
@@ -102,6 +103,22 @@ class GoodsController {
     } catch (error) {
       console.error('上架商品失败:', ctx.request.params.id)
       ctx.app.emit('error', restoreGoodsError, ctx)
+    }
+  }
+
+  async findAll(ctx, next) {
+    try {
+      const { page, pageSize } = ctx.request.query
+      const res = await findGoods(page, pageSize)
+
+      ctx.body = {
+        code: '0',
+        data: res,
+        message: '获取商品列表成功'
+      }
+    } catch (error) {
+      console.error('获取商品列表失败：', error)
+      ctx.app.emit('error', findGoodsError, ctx)
     }
   }
 }
