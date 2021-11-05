@@ -55,5 +55,15 @@ module.exports = {
     code: '10201',
     message: '图片上传失败',
     data: null
+  },
+  goodsFormatError: {
+    code: '10203',
+    message: '商品参数格式错误',
+    data: null
+  },
+  publishGoodsError: {
+    code: '10204',
+    message: '发布商品失败',
+    data: null
   }
 }

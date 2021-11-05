@@ -3,9 +3,12 @@ const Router = require('koa-router')
 const KoaBody = require('koa-body')
 
 const router = new Router({ prefix: '/goods' })
-const { upload } = require('../controller/good.controller')
+
+const { create } = require('../controller/goods.controller')
+
+const { upload } = require('../controller/goods.controller')
 const { auth, hasAdminPermission } = require('../middleware/auth.middleware')
-// const { koaBody } = require('../middleware/koaBody.middleware')
+const { validator } = require('../middleware/goods.middleware')
 
 /** 商品图片上传 */
 router.post(
@@ -21,5 +24,8 @@ router.post(
   }),
   upload
 )
+
+/** 发布商品 */
+router.post('/', auth, hasAdminPermission, validator, create)
 
 module.exports = router
