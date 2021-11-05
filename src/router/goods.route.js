@@ -6,7 +6,12 @@ const router = new Router({ prefix: '/goods' })
 
 const { create } = require('../controller/goods.controller')
 
-const { upload } = require('../controller/goods.controller')
+const {
+  upload,
+  update,
+  remove,
+  restore
+} = require('../controller/goods.controller')
 const { auth, hasAdminPermission } = require('../middleware/auth.middleware')
 const { validator } = require('../middleware/goods.middleware')
 
@@ -27,5 +32,17 @@ router.post(
 
 /** 发布商品 */
 router.post('/', auth, hasAdminPermission, validator, create)
+
+/** 更新商品 */
+router.put('/:id', auth, hasAdminPermission, validator, update)
+
+/** 硬删除商品 */
+// router.delete('/:id', auth, hasAdminPermission, remove)
+
+/** 下架商品 */
+router.post('/:id/off', auth, hasAdminPermission, remove)
+
+/** 商家商品 */
+router.post('/:id/on', auth, hasAdminPermission, restore)
 
 module.exports = router
