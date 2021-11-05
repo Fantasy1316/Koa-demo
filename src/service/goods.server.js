@@ -25,7 +25,10 @@ class GoodsServer {
     const offset = (page - 1) * pageSize
     const limit = parseInt(pageSize)
 
-    const { count, rows } = await Goods.findAndCountAll({ offset, limit })
+    const { count, rows } = await Goods.findAndCountAll({
+      attributes: ['id', 'goods_name', 'goods_price', 'goods_img'],
+      offset, limit
+    })
 
     return {
       page,
