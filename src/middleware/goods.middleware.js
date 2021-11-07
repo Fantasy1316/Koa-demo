@@ -1,7 +1,6 @@
 const { goodsFormatError } = require('../constant/err.constant')
 
 const validator = async (ctx, next) => {
-  console.log(ctx.request.body)
   try {
     ctx.verifyParams({
       goods_name: { type: 'string', required: true },

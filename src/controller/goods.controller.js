@@ -44,7 +44,7 @@ class GoodsController {
         message: '发布商品成功'
       }
     } catch (error) {
-      console.error('发布商品失败', error)
+      console.error('发布商品失败', error)
       ctx.app.emit('error', publishGoodsError, ctx)
     }
   }
@@ -108,7 +108,7 @@ class GoodsController {
 
   async findAll(ctx, next) {
     try {
-      const { page, pageSize } = ctx.request.query
+      const { page = 1, pageSize = 10 } = ctx.request.query
       const res = await findGoods(page, pageSize)
 
       ctx.body = {

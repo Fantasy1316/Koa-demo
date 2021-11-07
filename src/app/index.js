@@ -11,7 +11,9 @@ const app = new Koa()
 const router = require('../router')
 
 /** 注意：KoaBody 中间件必须在所有路由加载之前使用  */
-app.use(KoaBody())
+app.use(KoaBody({
+  parsedMethods: ['POST', 'PUT', 'PATCH', 'DELETE']
+}))
 /** 设置静态资源文件夹 */
 app.use(KoaStatic(path.join(__dirname, '../upload')))
 /** 设置全局参数校验 */
