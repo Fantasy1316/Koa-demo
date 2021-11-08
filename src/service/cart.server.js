@@ -3,7 +3,7 @@ const Cart = require('../model/cart.model')
 const Goods = require('../model/goods.model')
 
 class CartServer {
-  async createOrUpdate (user_id, goods_id) {
+  async createOrUpdate(user_id, goods_id) {
     const res = await Cart.findOne({
       where: {
         [Op.and]: {
@@ -24,7 +24,7 @@ class CartServer {
     }
   }
 
-  async findCarts (page, pageSize ) {
+  async findCarts(page, pageSize) {
     const offset = (page - 1) * pageSize
     const limit = parseInt(pageSize)
 
@@ -47,20 +47,20 @@ class CartServer {
     }
   }
 
-  async updateCarts (params) {
+  async updateCarts(params) {
     const { id, number, selected } = params
 
     const res = await Cart.findByPk(id)
 
     if (!res) return null
 
-    number !== undefined ? res.number = number : ''
-    selected !== undefined ? res.selected = selected : ''
+    number !== undefined ? (res.number = number) : ''
+    selected !== undefined ? (res.selected = selected) : ''
 
     return await res.save()
   }
 
-  async removeCarts (ids) {
+  async removeCarts(ids) {
     const res = await Cart.destroy({
       where: {
         id: {
@@ -77,7 +77,7 @@ class CartServer {
       {
         where: {
           user_id
-        } 
+        }
       }
     )
   }
@@ -88,7 +88,7 @@ class CartServer {
       {
         where: {
           user_id
-        } 
+        }
       }
     )
   }

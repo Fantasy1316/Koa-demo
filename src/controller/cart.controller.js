@@ -1,8 +1,15 @@
-const { createOrUpdate, findCarts, updateCarts, removeCarts, selectAllCart, unSelectAllCart } = require('../service/cart.server')
+const {
+  createOrUpdate,
+  findCarts,
+  updateCarts,
+  removeCarts,
+  selectAllCart,
+  unSelectAllCart
+} = require('../service/cart.server')
 const { cartFormatError } = require('../constant/err.constant')
 
 class CartController {
-  async add (ctx, next) {
+  async add(ctx, next) {
     const { id: user_id } = ctx.state.user
     const { goods_id } = ctx.request.body
 
@@ -16,7 +23,7 @@ class CartController {
   }
 
   async findAll(ctx, next) {
-    const { page = 1 , pageSize = 10 } = ctx.request.query
+    const { page = 1, pageSize = 10 } = ctx.request.query
 
     const res = await findCarts(page, pageSize)
 
@@ -58,10 +65,11 @@ class CartController {
   }
 
   async selectAll(ctx, next) {
+    console.log(ctx)
     const { id: user_id } = ctx.state.user
-
+    console.log('user_id', user_id)
     const res = await selectAllCart(user_id)
-
+    console.log('res', res)
     ctx.body = {
       code: 0,
       data: res,

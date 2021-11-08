@@ -27,7 +27,8 @@ class GoodsServer {
 
     const { count, rows } = await Goods.findAndCountAll({
       attributes: ['id', 'goods_name', 'goods_price', 'goods_img'],
-      offset, limit
+      offset,
+      limit
     })
 
     return {
