@@ -65,11 +65,10 @@ class CartController {
   }
 
   async selectAll(ctx, next) {
-    console.log(ctx)
     const { id: user_id } = ctx.state.user
-    console.log('user_id', user_id)
+
     const res = await selectAllCart(user_id)
-    console.log('res', res)
+
     ctx.body = {
       code: 0,
       data: res,
